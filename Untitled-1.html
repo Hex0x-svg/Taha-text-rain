@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling Text Animation</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100vh;
+            background-color: #000;
+        }
+
+        .falling-text {
+            position: absolute;
+            font-size: 24px;
+            color: white;
+            font-family: Arial, sans-serif;
+            user-select: none;
+            pointer-events: none;
+            animation: fall 3s linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px);
+            }
+            100% {
+                transform: translateY(calc(100vh + 100px));
+            }
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    document.body.addEventListener('click', function(event) {
+        const fallingText = document.createElement('div');
+        fallingText.classList.add('falling-text');
+        fallingText.textContent = 'Taha';
+
+        // Set random position for the falling text
+        fallingText.style.left = `${event.clientX - 25}px`;
+
+        document.body.appendChild(fallingText);
+
+        // Remove text after the animation completes to keep the DOM clean
+        fallingText.addEventListener('animationend', () => {
+            fallingText.remove();
+        });
+    });
+</script>
+
+</body>
+</html>
